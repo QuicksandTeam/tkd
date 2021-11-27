@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        window.οnlοad = function () {         //一进该页面就加载以下方法
+            tick();                             //显示右下角日期的方法
+            setInterval('countDown()', 1000);    //一般秒设置为参数为1000
+        }
+        var sec = 30;                  //设置倒计时时间为30秒
+        function countDown() {        //倒计时的方法
+            if (sec > 0) {
+                num.innerHTML = sec--;
+            } else {
+                location = "menu.html";  //倒计时为0进入的页面
+            }
+        }
+    </script>
+</head>
+<body>
+    <font color="red"><h2 align="right">倒计时</h2>
+    <font color="red"><h3 align="right" id="num" size="7" face="impact">30</h3></font>
+
+</body>
+</html>
