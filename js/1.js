@@ -13,7 +13,7 @@
 			// alert("时间到！");
 			pause();//一般情况下这个 if 条件是用来提交数据用的
 		}else{
-			$("#time p").html(Math.floor(shijian/60)+":"+shijian%60);
+			$("#time p.timedown").html(Math.floor(shijian/60)+":"+shijian%60);
 			shijian--;
 			console.info(time);
 		}
