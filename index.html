@@ -121,22 +121,22 @@
         //     aLink.click();
         // }
     </script>
-    <!--    <script>-->
+    <script>
 
-    <!--        $("#add").bind("click", function () {-->
-    <!--            var num1 = document.getElementById('num').textContent;-->
-    <!--            var num2 = document.getElementById('num2').textContent;-->
-    <!--            var fileName = 'test.txt'-->
-    <!--            var aLink = document.createElement('a');-->
-    <!--            var blob = new Blob([num1, num2]);-->
-    <!--            var evt = document.createEvent("HTMLEvents");-->
-    <!--            evt.initEvent("click", false, false);-->
-    <!--            aLink.download = fileName;-->
-    <!--            aLink.href = URL.createObjectURL(blob);-->
-    <!--            aLink.dispatchEvent(evt);-->
-    <!--            aLink.click();-->
-    <!--        })-->
-    <!--    </script>-->
+        $("#add").bind("click", function () {
+            var num1 = document.getElementById('num').textContent;
+            var num2 = document.getElementById('num2').textContent;
+            var fileName = 'test.txt'
+            var aLink = document.createElement('a');
+            var blob = new Blob([num1, num2]);
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("click", false, false);
+            aLink.download = fileName;
+            aLink.href = URL.createObjectURL(blob);
+            aLink.dispatchEvent(evt);
+            aLink.click();
+        })
+    </script>
     <!--    <script src="http://code.jquery.com/jquery-1.4.1.min.js"></script>-->
     <!--    <script>-->
     <!--        function save() {-->
@@ -159,13 +159,23 @@
 </head>
 <body>
 <div id="time">
-    <p>比赛记时：</p>
-    <p class="timedown">00:00</p>
+<!--    <p align="left" style="font-size: 20px">比赛记时：</p>-->
+    <span style="font-size: 20px">比赛记时：<p class="timedown">00:00</p></span>
     <input class="input_private" type="button" value="开始" onclick="start()"/>
     <input class="input_private" type="button" value="暂停" onclick="pause()"/>
     <input class="input_private" type="button" value="继续" onclick="goOn()"/>
     <!--    <input type="button" value="扣分" onclick="black_point()"/>-->
 </div>
+<br>
+<div id="time2">
+    <!--    <p align="left" style="font-size: 20px">比赛记时：</p>-->
+    <span style="font-size: 20px">中间休息/金赛局：<p class="timedown2">00:00</p></span>
+    <input class="input_private" type="button" value="开始" onclick="start2()"/>
+    <input class="input_private" type="button" value="暂停" onclick="pause2()"/>
+    <input class="input_private" type="button" value="继续" onclick="goOn2()"/>
+    <!--    <input type="button" value="扣分" onclick="black_point()"/>-->
+</div>
+
 <div class="line">
     <p id="num">0</p>
     <input type="button" class="btn" value="青方 +1" onclick="numPlus1()"/>
