@@ -9,8 +9,8 @@
 		const audio = new Audio('src/tkd.mp3');
 		if(shijian<0){
 			audio.play();
-			alert("time out");
 			shijian=10;
+			// alert("时间到！");
 			pause();//一般情况下这个 if 条件是用来提交数据用的
 		}else{
 			$("#time p").html(Math.floor(shijian/60)+":"+shijian%60);
