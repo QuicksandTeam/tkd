@@ -1,17 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
-    <script src="1.js"></script>
-    <script src="jquery-1.8.3.min.js"></script>
+    <title>厦门工学院第一届跆拳道比赛计时器</title>
+    <!-- 倒计时 js -start -->
+    <script src="js/1.js"></script>
+    <script src="js/jquery-1.8.3.min.js"></script>
     <script>
-        function black_point(){
+        function black_point() {
             document.write("⚫");
         }
     </script>
-    <style type="text/css">
-        input {
+    <link rel="stylesheet" href="css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 倒计时 js -end-->
+    <style>
+        body {
+            text-align: center;
+        }
+
+        p, #ipt, .btn {
+            font-size: 50px;
+        }
+
+        #ipt {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        #ipt, .btn {
+            height: 100px;
+            padding: 0px 20px;
+        }
+
+        #ipt, .btnmin {
+            height: 30px;
+            padding: 0px 20px;
+        }
+
+        /*.line {*/
+        /*    display: inline-block;*/
+        /*    width: 40%;*/
+        /*    !*height: 200px;*!*/
+        /*}*/
+
+        div.line {
+            display: inline-block;
+            width: 500px;
+            height: 200px;
+        }
+
+        /* 倒计时 css -start */
+        .input_private {
             background-color: #9fc5f1;
             width: 100px;
             height: 30px;
@@ -22,23 +62,140 @@
             font-weight: bold;
         }
 
-        #time p {
+        div #time p {
             color: #1f6dc2;
             font-size: 48px;
             font-weight: bold;
             margin-left: 90px;
             margin-bottom: 0px;
         }
+
+        /* 倒计时 css -end */
+        /*div.save {*/
+        /*    !*display: ;*!*/
+        /*}*/
     </style>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script>
+        function numPlus1() {
+            var p = document.getElementById('num');
+            p.innerHTML++;
+        }
+
+        function numMinus1() {
+            var p = document.getElementById('num');
+            p.innerHTML--;
+        }
+
+        function numPlus2() {
+            var p = document.getElementById('num1');
+            p.innerHTML++;
+        }
+
+        function numMinus2() {
+            var p = document.getElementById('num1');
+            p.innerHTML--;
+        }
+
+        function read1() {
+            var num1 = document.getElementById('num').textContent;
+            return num1;
+        }
+
+        function read2() {
+            var num2 = document.getElementById('num2').textContent;
+            return num2;
+        }
+
+        // function save() {
+        //     //     $("#add").bind("click", function () {
+        //     var num1 = document.getElementById('num').textContent;
+        //     var num2 = document.getElementById('num2').textContent;
+        //     var fileName = 'score.txt'
+        //     var aLink = document.createElement('a');
+        //     var blob = new Blob([num1, num2]);
+        //     var evt = document.createEvent("HTMLEvents");
+        //     evt.initEvent("click", false, false);
+        //     aLink.download = fileName;
+        //     aLink.href = URL.createObjectURL(blob);
+        //     aLink.dispatchEvent(evt);
+        //     aLink.click();
+        // }
+    </script>
+    <!--    <script>-->
+
+    <!--        $("#add").bind("click", function () {-->
+    <!--            var num1 = document.getElementById('num').textContent;-->
+    <!--            var num2 = document.getElementById('num2').textContent;-->
+    <!--            var fileName = 'test.txt'-->
+    <!--            var aLink = document.createElement('a');-->
+    <!--            var blob = new Blob([num1, num2]);-->
+    <!--            var evt = document.createEvent("HTMLEvents");-->
+    <!--            evt.initEvent("click", false, false);-->
+    <!--            aLink.download = fileName;-->
+    <!--            aLink.href = URL.createObjectURL(blob);-->
+    <!--            aLink.dispatchEvent(evt);-->
+    <!--            aLink.click();-->
+    <!--        })-->
+    <!--    </script>-->
+    <!--    <script src="http://code.jquery.com/jquery-1.4.1.min.js"></script>-->
+    <!--    <script>-->
+    <!--        function save() {-->
+    <!--        //     $("#add").bind("click", function () {-->
+    <!--                var num1 = document.getElementById('num').textContent;-->
+    <!--                var num2 = document.getElementById('num2').textContent;-->
+    <!--                var fileName = 'score.txt'-->
+    <!--                var aLink = document.createElement('a');-->
+    <!--                var blob = new Blob([num1, num2]);-->
+    <!--                var evt = document.createEvent("HTMLEvents");-->
+    <!--                evt.initEvent("click", false, false);-->
+    <!--                aLink.download = fileName;-->
+    <!--                aLink.href = URL.createObjectURL(blob);-->
+    <!--                aLink.dispatchEvent(evt);-->
+    <!--                aLink.click();-->
+    <!--            }-->
+    <!--            // )-->
+    <!--        // }-->
+    <!--    </script>-->
+</head>
 <body>
 <div id="time">
     <p>00:00</p>
-    <input type="button" value="开始" onclick="start()"/>
-    <input type="button" value="暂停" onclick="pause()"/>
-    <input type="button" value="继续" onclick="goOn()"/>
-    <input type="button" value="扣分" onclick="black_point()"/>
+    <input class="input_private" type="button" value="开始" onclick="start()"/>
+    <input class="input_private" type="button" value="暂停" onclick="pause()"/>
+    <input class="input_private" type="button" value="继续" onclick="goOn()"/>
+    <!--    <input type="button" value="扣分" onclick="black_point()"/>-->
 </div>
+<div class="line">
+    <p id="num">0</p>
+    <input type="button" class="btn" value="青方 +1" onclick="numPlus1()"/>
+    <input type="button" class="btn" value="青方 -1" onclick="numMinus1()"/>
+</div>
+<div class="line">
+    <p id="num1">0</p>
+    <input type="button" class="btn" value="红方 +1" onclick="numPlus2()"/>
+    <input type="button" class="btn" value="红方 -1" onclick="numMinus2()"/>
+</div>
+<div class="save">
+    <!--    <input type="button" class="btnmin" value="保存分数" onclick="save()"/>-->
+    <input id="add" type="button" value="保存"/>
+    <script src="js/jquery-1.4.1.min.js"></script>
+    <script>
+
+        $("#add").bind("click", function () {
+            // var num1 = document.getElementById('num').textContent;
+            // var num2 = document.getElementById('num2').textContent;
+            var fileName = 'test.txt'
+            var aLink = document.createElement('a');
+            var blob = new Blob([read1(), read2()]);
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("click", false, false);
+            aLink.download = fileName;
+            aLink.href = URL.createObjectURL(blob);
+            aLink.dispatchEvent(evt);
+            aLink.click();
+        })
+    </script>
+</div>
+
 </body>
 </html>

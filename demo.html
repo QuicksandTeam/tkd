@@ -1,26 +1,193 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />-->
+<!--    <title></title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<script>-->
+<!--    function saveFile(T,content)-->
+<!--    {//保存-->
+<!--        var filename=document.getElementById(T).value;-->
+<!--        var win=window.open('','','top=10000,left=10000');-->
+<!--        win.document.write(document.getElementById(content).innerHTML);-->
+<!--        win.document.execCommand('SaveAs','',filename)-->
+<!--        win.close();-->
+<!--    }-->
+<!--</SCRIPT>-->
+<!--<form name="saveas" action="" method="post">-->
+<!--    文件名称:<input type="text" id="title_1" value="123.html">-->
+<!--    <br>-->
+<!--    文件内容：<textarea id="content_1" style="height:150px;width:400px;">-->
+<!--新兴网络 - http://www.newxing.com/-->
+<!--</textarea>-->
+<!--    <br>-->
+<!--    <input type="button" value="保存文本" onClick=saveFile('title_1','content_1')>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script type="text/javascript">
-        window.οnlοad = function () {         //一进该页面就加载以下方法
-            tick();                             //显示右下角日期的方法
-            setInterval('countDown()', 1000);    //一般秒设置为参数为1000
-        }
-        var sec = 30;                  //设置倒计时时间为30秒
-        function countDown() {        //倒计时的方法
-            if (sec > 0) {
-                num.innerHTML = sec--;
-            } else {
-                location = "menu.html";  //倒计时为0进入的页面
-            }
-        }
-    </script>
+    <title>05_淡入淡出动画效果</title>
 </head>
 <body>
-    <font color="red"><h2 align="right">倒计时</h2>
-    <font color="red"><h3 align="right" id="num" size="7" face="impact">30</h3></font>
+<input id="add" type="button" value="保存" />
 
+<script src="js/jquery-1.4.1.min.js"></script>
+ <script>
+
+    $("#add").bind("click", function () {
+        var content = "123123"
+        var fileName = 'test.txt'
+        var aLink = document.createElement('a');
+        var blob = new Blob([content]);
+        var evt = document.createEvent("HTMLEvents");
+        evt.initEvent("click", false, false);
+        aLink.download = fileName;
+        aLink.href = URL.createObjectURL(blob);
+        aLink.dispatchEvent(evt);
+        aLink.click();
+    })
+
+
+</script>
 </body>
 </html>
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>倒计时</title>-->
+<!--    <style>-->
+<!--        #time {-->
+<!--            width: 350px;-->
+<!--            height: 200px;-->
+<!--            margin: 100px auto;-->
+<!--        }-->
+
+<!--        #time input {-->
+<!--            margin: 20px auto;-->
+<!--            text-align: center;-->
+<!--            border-radius: 10px;-->
+<!--        }-->
+
+<!--        input::-webkit-outer-spin-button,-->
+<!--        input::-webkit-inner-spin-button {-->
+<!--            -webkit-appearance: none;-->
+<!--        }-->
+
+<!--        button {-->
+<!--            margin: 0 0 0 35px;-->
+<!--            border-radius: 10px;-->
+<!--        }-->
+
+<!--        #start {-->
+<!--            font-size: 1.55em;-->
+<!--        }-->
+<!--    </style>-->
+<!--    <script>-->
+<!--        function $(el) {-->
+<!--            if(typeof(el) == 'string') {-->
+<!--                return(document.getElementById(el));-->
+<!--            }-->
+<!--            return(el);-->
+<!--        }-->
+
+<!--        function fillZero(num, digit) {-->
+<!--            var str = '' + num;-->
+<!--            if(str.length < digit) {-->
+<!--                str = '0' + str;-->
+<!--            }-->
+<!--            return str;-->
+<!--        }-->
+<!--        window.onload = function() {-->
+<!--            var oDiv1 = $('time');-->
+<!--            var aInput = oDiv1.getElementsByTagName('input');-->
+<!--            var oYear = aInput[0]; //年-->
+<!--            var oMonth = aInput[1]; //月-->
+<!--            var oDay = aInput[2] //日-->
+<!--            var oDiv2 = $('start');-->
+<!--            var aSpan = oDiv2.getElementsByTagName('span');-->
+<!--            var sTxtDay = aSpan[0]; //天-->
+<!--            var sTxtHour = aSpan[1] //小时-->
+<!--            var sTxtMin = aSpan[2] //分-->
+<!--            var sTxtSec = aSpan[3] //秒-->
+<!--            var oTxtTarget = document.getElementsByTagName('b')[0];-->
+<!--            var timer = null;-->
+<!--            $('btn1').onclick = function() {-->
+<!--                timer = setInterval(updateTime, 1000);-->
+<!--                updateTime();-->
+<!--            }-->
+<!--            $('btn2').onclick = function() {-->
+<!--                clearInterval(timer);-->
+<!--            }-->
+
+<!--            function updateTime() {-->
+
+<!--                var sYear = Math.abs(oYear.value);-->
+<!--                var sMonth = Math.abs(oMonth.value);-->
+<!--                var sDay = Math.abs(oDay.value);-->
+<!--                if(sMonth > 12 || sDay > 31){-->
+<!--                    clearInterval(timer);-->
+<!--                    alert('你又调皮了');-->
+<!--                    return;-->
+<!--                }-->
+<!--                oTxtTarget.innerHTML = sYear + ' 年 ' + sMonth + ' 月 ' + sDay + ' 日 ';-->
+<!--                var oEndDate = new Date(sYear, (sMonth - 1), sDay);-->
+<!--                var oNowDate = new Date();-->
+<!--                var iRemain = 0;-->
+<!--                iRemain = parseInt((oEndDate.getTime() - oNowDate.getTime()) / 1000);-->
+<!--                if(iRemain <= 0) { //判断开始时间是否小于或等于今天-->
+<!--                    clearInterval(timer);-->
+<!--                    iRemain = 0;-->
+<!--                    alert('请输入大于今天的时间');-->
+<!--                }-->
+<!--                var iDay = parseInt(iRemain / 86400); //剩余天数-->
+
+<!--                iRemain %= 86400;-->
+<!--                var iHour = parseInt(iRemain / 3600); //剩余小时-->
+
+<!--                iRemain %= 3600;-->
+<!--                var iMin = parseInt(iRemain / 60); //剩余分钟-->
+
+<!--                iRemain %= 60;-->
+<!--                var iSec = iRemain; //剩余秒-->
+
+<!--                sTxtDay.innerHTML = fillZero(iDay, 2);-->
+<!--                sTxtHour.innerHTML = fillZero(iHour, 2);-->
+<!--                sTxtMin.innerHTML = fillZero(iMin, 2);-->
+<!--                sTxtSec.innerHTML = fillZero(iSec, 2);-->
+<!--            }-->
+
+
+<!--        }-->
+<!--    </script>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div id="time">-->
+<!--    年: <input type="number" min="2020" max="2020" value="2020" />-->
+<!--    月: <input type="number" min="1" max="12" value="4" />-->
+<!--    日: <input type="number" min="1" max="31" value="1" />-->
+<!--    <p><button id="btn1">开始倒计时</button><button id="btn2">停止倒计时</button></p>-->
+<!--    <p>现在距离:<b>2020 年 4 月 1 日</b> 还剩 </p>-->
+<!--    <div id="start">-->
+<!--        <span>00</span>天-->
+<!--        <span>00</span>小时-->
+<!--        <span>00</span>分-->
+<!--        <span>00</span>秒-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+
+<!--</html>-->

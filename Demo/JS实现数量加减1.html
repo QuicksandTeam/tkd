@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        $(function () {
+            var t = $('#goodscount');/*  数量显示框*/
+            $('#plus').click(function () {
+                if (t.val() < $('#reservenum').val()) {/* 数量最大不能超过商品库存量 */
+                    t.val(parseInt(t.val()) + 1);
+                } else {
+                    t.val($('#reservenum').val());
+                }
+            })
+            $('#minus').click(function () {
+                if (t.val() <= 1) {	/*数量最少为1  */
+                    t.val(1);
+                } else {
+                    t.val(parseInt(t.val()) - 1);
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+    <input id="goodscount" type="text" class="quantity" value="1">
+    <a id="plus" class="minus j-gACbtn">+</a>
+<!--    <a id="minus" href="#" class="minus j-gACbtn">-</a>-->
+    <input type="button" value="扣分" id="minus" class="minus j-gACbtn"/>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>厦门工学院第一届跆拳道比赛计时器</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        p, #ipt, .btn {
+            font-size: 50px;
+        }
+
+        #ipt {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+          #ipt, .btn {
+            height: 100px;
+            padding: 0px 20px;
+        }
+
+        /*.line {*/
+        /*    display: inline-block;*/
+        /*    width: 40%;*/
+        /*    !*height: 200px;*!*/
+        /*}*/
+
+        div {
+            display: inline-block;
+            width: 600px;
+            height: 200px;
+        }
+    </style>
+    <script>
+        function numPlus1() {
+            var p = document.getElementById('num');
+            p.innerHTML++;
+        }
+        function numMinus1() {
+            var p = document.getElementById('num');
+            p.innerHTML--;
+        }
+        function numPlus2() {
+            var p = document.getElementById('num1');
+            p.innerHTML++;
+        }
+        function numMinus2() {
+            var p = document.getElementById('num1');
+            p.innerHTML--;
+        }
+    </script>
+</head>
+<body>
+<div>
+    <p id="num">0</p>
+    <input type="button" class="btn" value="青方 +1" onclick="numPlus1()"/>
+    <input type="button" class="btn" value="青方 -1" onclick="numMinus1()"/>
+</div>
+<div>
+    <p id="num1">0</p>
+    <input type="button" class="btn" value="红方 +1" onclick="numPlus2()"/>
+    <input type="button" class="btn" value="红方 -1" onclick="numMinus2()"/>
+</div>
+</body>
+</html>
