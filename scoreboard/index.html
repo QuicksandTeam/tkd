@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>厦门工学院第一届跆拳道比赛计时器</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <link href='https://fonts.googleapis.com/css?family=Marcellus+SC' rel='stylesheet' type='text/css'>
+    <div id="root"></div>
+    <div class="timer"></div>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+</head>
+<body>
+
+<style type="text/css">
+    body {
+        background: background-color: #00DBDE;
+        background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+        margin: 48px;
+        text-align: center;
+    }
+
+    .timer {
+        font-family: sans-serif;
+        display: inline-block;
+        padding: 50px 95px;
+        border-radius: 60px;
+        background: white;
+        text-align: center;
+    }
+
+    .timer__part {
+        font-size: 90px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .timer__btn {
+        width: 65px;
+        height: 65px;
+        margin-left: 16px;
+        border-radius: 50%;
+        border: none;
+        color: white;
+        background: #8208e6;
+        cursor: pointer;
+    }
+
+    .timer__btn--start {
+        background: #00b84c;
+    }
+
+    .timer__btn--stop {
+        background: #ff0256;
+    }
+
+</style>
+<script type="text/javascript">
+    class Timer {
+        constructor(root) {
+            root.innerHTML = Timer.getHTML();
+
+            this.el = {
+                minutes: root.querySelector(".timer__part--minutes"),
+                seconds: root.querySelector(".timer__part--seconds"),
+                control: root.querySelector(".timer__btn--control"),
+                reset: root.querySelector(".timer__btn--reset")
+            };
+            this.interval = null;
+            this.remainingSeconds = 120;
+
+            this.el.control.addEventListener("click", () => {
+                if (this.interval === null) {
+                    this.start();
+                } else {
+                    this.stop();
+                }
+            });
+
+            this.el.reset.addEventListener("click", () => {
+                const inputMinutes = prompt("Enter number of minutes:");
+
+                if (inputMinutes < 60) {
+                    this.stop();
+                    this.remainingSeconds = inputMinutes * 60;
+                    this.updateInterfaceTime();
+                }
+            });
+        }
+
+        updateInterfaceTime() {
+            const minutes = Math.floor(this.remainingSeconds / 60);
+            const seconds = this.remainingSeconds % 60;
+
+            this.el.minutes.textContent = minutes.toString().padStart(2, "0");
+            this.el.seconds.textContent = seconds.toString().padStart(2, "0");
+        }
+
+        updateInterfaceControls() {
+            if (this.interval === null) {
+                this.el.control.innerHTML = `<span class="material-icons">play_arrow</span>`;
+                this.el.control.classList.add("timer__btn--start");
+                this.el.control.classList.remove("timer__btn--stop");
+            } else {
+                this.el.control.innerHTML = `<span class="material-icons">pause</span>`;
+                this.el.control.classList.add("timer__btn--stop");
+                this.el.control.classList.remove("timer__btn--start");
+            }
+        }
+
+        start() {
+            if (this.remainingSeconds === 0) return;
+
+            this.interval = setInterval(() => {
+                this.remainingSeconds--;
+                this.updateInterfaceTime();
+
+                if (this.remainingSeconds === 0) {
+                    this.stop();
+                }
+            }, 1000);
+
+            this.updateInterfaceControls();
+        }
+
+        stop() {
+            clearInterval(this.interval);
+
+            this.interval = null;
+
+            this.updateInterfaceControls();
+        }
+
+        static getHTML() {
+            return `
+			<span class="timer__part timer__part--minutes">02</span>
+			<span class="timer__part">:</span>
+			<span class="timer__part timer__part--seconds">00</span>
+			<button type="button" class="timer__btn timer__btn--control timer__btn--start">
+				<span class="material-icons">play_arrow</span>
+			</button>
+			<button type="button" class="timer__btn timer__btn--reset">
+				<span class="material-icons">timer</span>
+			</button>
+		`;
+        }
+    }
+
+    new Timer(
+        document.querySelector(".timer")
+    );
+</script>
+<div id="container">
+
+    <div id="player1">
+        <div id="p1score">
+            <h1>Blueness</h1>
+            <ul>
+                <li class="scoreblock minus" onclick="minusOne(score1)">-</li>
+                <li id="p120" class="scoreblock" value=0></li>
+                <li class="scoreblock plus" onclick="addOne(score1)">+</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="player2">
+        <div id="p2score">
+            <h1>Red</h1>
+            <ul>
+                <li class="scoreblock minus" onclick="minusOne(score2)">-</li>
+                <li id="p220" class="scoreblock" value=0></li>
+                <li class="scoreblock plus" onclick="addOne(score2)">+</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<style type="text/css">
+    * {
+        font-family: 'Marcellus SC', serif;
+        font-weight: 200;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+
+    #container {
+        width: 100%;
+        margin: 5% auto;
+    }
+
+    #player1 {
+        background-color: background-color: #0093E9;
+        background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        float: left;
+        width: 20%;
+        height: 600px;
+        margin: 0 auto;
+    }
+
+    #player1 h1,
+    #player2 h1 {
+        font-size: 60px;
+        color: white;
+        line-height: 100px;
+    }
+
+    #player2 {
+        background-color: background-color: #FFE53B;
+        background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+        float: right;
+        width: 20%;
+        height: 600px;
+        margin: 0 auto;
+    }
+
+    .scoreblock {
+        background-color: rgba(0, 0, 0, 0);
+        border-radius: 15px;
+        color: white;
+        position: relative;
+        float: left;
+        font-size: 100px;
+        line-height: 150px;
+        list-style: none;
+        left: 15%;
+        margin: 0 10px;
+        width: 20%;
+        height: 150px;
+    }
+
+    .minus:hover,
+    .plus:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .minus:active,
+    .plus:active {
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+
+</style>
+<script type="text/javascript">
+    var score1 = document.getElementById("p120");
+    var score2 = document.getElementById("p220");
+
+    score1.innerHTML = score1.value;
+    score2.innerHTML = score2.value;
+
+    function addOne(score) {
+        score.value++;
+        score.innerHTML = score.value;
+    }
+
+    function minusOne(score) {
+        score.value--;
+        score.innerHTML = score.value;
+    }
+</script>
+<div id="particles-js"></div>
+<script src="js/particles.js"></script>
+<script type="text/javascript">
+    {
+        "particles"
+    :
+        {
+            "number"
+        :
+            {
+                "value"
+            :
+                80,
+                    "density"
+            :
+                {
+                    "enable"
+                :
+                    true,
+                        "value_area"
+                :
+                    800
+                }
+            }
+        ,
+            "color"
+        :
+            {
+                "value"
+            :
+                "#ffffff"
+            }
+        ,
+            "shape"
+        :
+            {
+                "type"
+            :
+                "polygon",
+                    "stroke"
+            :
+                {
+                    "width"
+                :
+                    0,
+                        "color"
+                :
+                    "#000000"
+                }
+            ,
+                "polygon"
+            :
+                {
+                    "nb_sides"
+                :
+                    5
+                }
+            ,
+                "image"
+            :
+                {
+                    "src"
+                :
+                    "img/github.svg",
+                        "width"
+                :
+                    100,
+                        "height"
+                :
+                    100
+                }
+            }
+        ,
+            "opacity"
+        :
+            {
+                "value"
+            :
+                0.5,
+                    "random"
+            :
+                false,
+                    "anim"
+            :
+                {
+                    "enable"
+                :
+                    false,
+                        "speed"
+                :
+                    1,
+                        "opacity_min"
+                :
+                    0.1,
+                        "sync"
+                :
+                    false
+                }
+            }
+        ,
+            "size"
+        :
+            {
+                "value"
+            :
+                3,
+                    "random"
+            :
+                true,
+                    "anim"
+            :
+                {
+                    "enable"
+                :
+                    false,
+                        "speed"
+                :
+                    40,
+                        "size_min"
+                :
+                    0.1,
+                        "sync"
+                :
+                    false
+                }
+            }
+        ,
+            "line_linked"
+        :
+            {
+                "enable"
+            :
+                true,
+                    "distance"
+            :
+                150,
+                    "color"
+            :
+                "#ffffff",
+                    "opacity"
+            :
+                0.4,
+                    "width"
+            :
+                1
+            }
+        ,
+            "move"
+        :
+            {
+                "enable"
+            :
+                true,
+                    "speed"
+            :
+                6,
+                    "direction"
+            :
+                "none",
+                    "random"
+            :
+                false,
+                    "straight"
+            :
+                false,
+                    "out_mode"
+            :
+                "out",
+                    "bounce"
+            :
+                false,
+                    "attract"
+            :
+                {
+                    "enable"
+                :
+                    false,
+                        "rotateX"
+                :
+                    600,
+                        "rotateY"
+                :
+                    1200
+                }
+            }
+        }
+    ,
+        "interactivity"
+    :
+        {
+            "detect_on"
+        :
+            "canvas",
+                "events"
+        :
+            {
+                "onhover"
+            :
+                {
+                    "enable"
+                :
+                    true,
+                        "mode"
+                :
+                    "repulse"
+                }
+            ,
+                "onclick"
+            :
+                {
+                    "enable"
+                :
+                    true,
+                        "mode"
+                :
+                    "push"
+                }
+            ,
+                "resize"
+            :
+                true
+            }
+        ,
+            "modes"
+        :
+            {
+                "grab"
+            :
+                {
+                    "distance"
+                :
+                    400,
+                        "line_linked"
+                :
+                    {
+                        "opacity"
+                    :
+                        1
+                    }
+                }
+            ,
+                "bubble"
+            :
+                {
+                    "distance"
+                :
+                    400,
+                        "size"
+                :
+                    40,
+                        "duration"
+                :
+                    2,
+                        "opacity"
+                :
+                    8,
+                        "speed"
+                :
+                    3
+                }
+            ,
+                "repulse"
+            :
+                {
+                    "distance"
+                :
+                    200,
+                        "duration"
+                :
+                    0.4
+                }
+            ,
+                "push"
+            :
+                {
+                    "particles_nb"
+                :
+                    4
+                }
+            ,
+                "remove"
+            :
+                {
+                    "particles_nb"
+                :
+                    2
+                }
+            }
+        }
+    ,
+        "retina_detect"
+    :
+        false
+    }
+</script>
+</body>
+</html>
