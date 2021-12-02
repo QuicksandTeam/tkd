@@ -7,4 +7,4 @@
 
 首先，前期工作由 AI悦创：[https://www.aiyc.top/](https://www.aiyc.top/)，完成。
 
-但后期 Plus 完善部分，非常
+**但后期 Plus 完善部分，非常感谢 ICBUG 的鼎立支持！**
