@@ -26,7 +26,7 @@
 	}
 // ----------------------------------
 	// var shijian2=120;
-	var shijian2=3;
+	var shijian2=60;
 	var time2=null;
 	function start2(){
 		time2=setInterval("count2()",1000);//倒计时
@@ -36,7 +36,7 @@
 		const audio2 = new Audio('src/tkd.mp3');
 		if(shijian2<0){
 			audio2.play();
-			shijian2=10;
+			shijian2=60;
 			// alert("时间到！");
 			pause2();//一般情况下这个 if 条件是用来提交数据用的
 		}else{
