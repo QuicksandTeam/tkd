@@ -3,13 +3,13 @@
 <head>
     <div id="particles"></div>
     <style type="text/css">
-    #particles {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: -1; 
-        background-color: #26AFE3;
-     }</style>
+        #particles {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: -1;
+            background-color: #26AFE3;
+        }</style>
     <script src="js/particles.js"></script>
     <meta charset="UTF-8">
     <title>厦门工学院第一届跆拳道比赛计时器</title>
@@ -87,6 +87,7 @@
         .scoreFontSize {
             font-size: 100px;
         }
+
         .buttonSize {
 
         }
@@ -175,7 +176,7 @@
 </head>
 <body>
 <div id="time">
-<!--    <p align="left" style="font-size: 20px">比赛记时：</p>-->
+    <!--    <p align="left" style="font-size: 20px">比赛记时：</p>-->
     <span style="font-size: 20px">比赛记时：<p class="timedown">00:00</p></span>
     <input class="input_private" type="button" value="开始" onclick="start()"/>
     <input class="input_private" type="button" value="暂停" onclick="pause()"/>
@@ -207,153 +208,153 @@
     <!--<input id="add" type="button" value="保存"/>-->
     <script src="js/jquery-1.4.1.min.js"></script>
     <script>
-    document.querySelector('#sf').addEventListener('click', saveFile);
+        document.querySelector('#sf').addEventListener('click', saveFile);
 
-       function fakeClick(obj) { 
-       　　var ev = document.createEvent("MouseEvents");
-　　　　ev.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-　　　　obj.dispatchEvent(ev);
-　　}
+        function fakeClick(obj) {
+            var ev = document.createEvent("MouseEvents");
+            ev.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            obj.dispatchEvent(ev);
+        }
 
-　　function exportRaw(name, data) {
-　　　　var urlObject = window.URL || window.webkitURL || window;
-　　　　var export_blob = new Blob([data]);
-　　　　var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a")
-　　　　save_link.href = urlObject.createObjectURL(export_blob);
-　　　　save_link.download = name;
-　　　　fakeClick(save_link);
-　　}
+        function exportRaw(name, data) {
+            var urlObject = window.URL || window.webkitURL || window;
+            var export_blob = new Blob([data]);
+            var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a")
+            save_link.href = urlObject.createObjectURL(export_blob);
+            save_link.download = name;
+            fakeClick(save_link);
+        }
 
-　　function saveFile(){
-        var inValue = document.getElementById("num").innerHTML;
-        exportRaw('青方得分.txt',inValue);
-        var inT = document.getElementById("num1").innerHTML;
-        exportRaw('红方得分.txt',inT);
-　　}
+        function saveFile() {
+            var inValue = document.getElementById("num").innerHTML;
+            exportRaw('青方得分.txt', inValue);
+            var inT = document.getElementById("num1").innerHTML;
+            exportRaw('红方得分.txt', inT);
+        }
     </script>
 </div>
 <style>
-    #particles{
+    #particles {
         background-color: #0093E9;
         background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
     }
 </style>
 
 <script type="text/javascript">
-// particlesJS.load('particles', './js/app/particles.json', function() {
-//  console.log('callback - particles.js config loaded');
-// });
+    // particlesJS.load('particles', './js/app/particles.json', function() {
+    //  console.log('callback - particles.js config loaded');
+    // });
 
-particlesJS("particles", {
- "particles": {
-  "number": {
-   "value": 30,
-   "density": {
-    "enable": true,
-    "value_area": 800
-   }
-  },
-  "color": {
-   "value": "#ffffff"
-  },
-  "shape": {
-   "type": "circle",
-   "stroke": {
-    "width": 0,
-    "color": "#000000"
-   },
-   "polygon": {
-    "nb_sides": 5
-   },
-   "image": {
-    "src": "img/github.svg",
-    "width": 100,
-    "height": 100
-   }
-  },
-  "opacity": {
-   "value": 0.5,
-   "random": false,
-   "anim": {
-    "enable": false,
-    "speed": 1,
-    "opacity_min": 0.1,
-    "sync": false
-   }
-  },
-  "size": {
-   "value": 10,
-   "random": true,
-   "anim": {
-    "enable": false,
-    "speed": 50,
-    "size_min": 0.1,
-    "sync": false
-   }
-  },
-  "line_linked": {
-   "enable": true,
-   "distance": 300,
-   "color": "#ffffff",
-   "opacity": 0.4,
-   "width": 2
-  },
-  "move": {
-   "enable": true,
-   "speed": 8,
-   "direction": "none",
-   "random": false,
-   "straight": false,
-   "out_mode": "out",
-   "bounce": false,
-   "attract": {
-    "enable": false,
-    "rotateX": 600,
-    "rotateY": 1200
-   }
-  }
- },
- "interactivity": {
-  "detect_on": "canvas",
-  "events": {
-   "onhover": {
-    "enable": false,
-    "mode": "repulse"
-   },
-   "onclick": {
-    "enable": false,
-    "mode": "push"
-   },
-   "resize": true
-  },
-  "modes": {
-   "grab": {
-    "distance": 800,
-    "line_linked": {
-     "opacity": 1
-    }
-   },
-   "bubble": {
-    "distance": 800,
-    "size": 80,
-    "duration": 2,
-    "opacity": 0.8,
-    "speed": 3
-   },
-   "repulse": {
-    "distance": 400,
-    "duration": 0.4
-   },
-   "push": {
-    "particles_nb": 4
-   },
-   "remove": {
-    "particles_nb": 2
-   }
-  }
- },
- "retina_detect": true
-});
+    particlesJS("particles", {
+        "particles": {
+            "number": {
+                "value": 30,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#ffffff"
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#000000"
+                },
+                "polygon": {
+                    "nb_sides": 5
+                },
+                "image": {
+                    "src": "img/github.svg",
+                    "width": 100,
+                    "height": 100
+                }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 10,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 50,
+                    "size_min": 0.1,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 300,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 2
+            },
+            "move": {
+                "enable": true,
+                "speed": 8,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": {
+                    "enable": false,
+                    "mode": "repulse"
+                },
+                "onclick": {
+                    "enable": false,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 800,
+                    "line_linked": {
+                        "opacity": 1
+                    }
+                },
+                "bubble": {
+                    "distance": 800,
+                    "size": 80,
+                    "duration": 2,
+                    "opacity": 0.8,
+                    "speed": 3
+                },
+                "repulse": {
+                    "distance": 400,
+                    "duration": 0.4
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true
+    });
 </script>
 </body>
 </html>
