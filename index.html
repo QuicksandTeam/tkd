@@ -39,7 +39,7 @@
         }
 
         #ipt, .btn {
-            height: 100px;
+            height: 90px;
             padding: 0px 20px;
         }
 
@@ -84,6 +84,12 @@
         /*div.save {*/
         /*    !*display: ;*!*/
         /*}*/
+        .scoreFontSize {
+            font-size: 100px;
+        }
+        .buttonSize {
+
+        }
     </style>
     <script>
         function numPlus1() {
@@ -187,12 +193,12 @@
 </div>
 
 <div class="line">
-    <p id="num">0</p>
+    <p id="num" class="scoreFontSize">0</p>
     <input type="button" class="btn" value="青方 +1" onclick="numPlus1()"/>
     <input type="button" class="btn" value="青方 -1" onclick="numMinus1()"/>
 </div>
 <div class="line">
-    <p id="num1">0</p>
+    <p id="num1" class="scoreFontSize">0</p>
     <input type="button" class="btn" value="红方 +1" onclick="numPlus2()"/>
     <input type="button" class="btn" value="红方 -1" onclick="numMinus2()"/>
 </div>
