@@ -3,8 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        $("#guessButton").click(function () {
+            var guess = $('#userGuess').val;
+            if (guess == number) {
+                $('#guessList').text("<li>You've guessed the number!!</li>");
+            } else if (guess < number) {
+                // $('#guessList').text("<li>You'll need to go higher.</li>");
+                $('#guessList').append($("<li>You'll need to go higher.</li>"));
+            } else if (guess > number) {
+                $('#guessList').text("<li>" + "You'll need to go lower." + '</li>')
+            }
+        });
+    </script>
 </head>
 <body>
+<section class="game"> <!-- Guessing Section -->
+
+    <h2 id="feedback">Make your Guess!</h2>
+
+    <form>
+        <input type="text" name="userGuess" id="userGuess" class="text" maxlength="3" autocomplete="off"
+               placeholder="Enter your Guess" required/>
+        <input type="submit" id="guessButton" class="button" name="submit" value="Guess"/>
+    </form>
+
+    <p>Guess #<span id="count">0</span>!</p>
+
+    <!--    <ul id="guessList" class="guessBox clearfix">-->
+
+    <ul id="guessList" class="guessBox clearfix">
+        &lt;li&gt;You'll need to go higher.&lt;/li&gt;
+    </ul>
+    </ul>
+
+</section>
 
 </body>
 </html>
