@@ -8,7 +8,8 @@
             top: 0;
             width: 100%;
             z-index: -1;
-            background-color: #26AFE3;
+            /*background-color: #26AFE3;*/
+            background-color: white;
         }</style>
     <script src="js/particles.js"></script>
     <meta charset="UTF-8">
@@ -177,7 +178,7 @@
 <body>
 <div id="time">
     <!--    <p align="left" style="font-size: 20px">比赛记时：</p>-->
-    <span style="font-size: 20px">比赛记时：<p class="timedown">00:00</p></span>
+    <span style="font-size: 20px">比赛记时：<p class="timedown" style="font-size: 50px">00:00</p></span>
     <input class="input_private" type="button" value="开始" onclick="start()"/>
     <input class="input_private" type="button" value="暂停" onclick="pause()"/>
 <!--    <input class="input_private" type="button" value="继续" onclick="goOn()"/>-->
@@ -236,6 +237,7 @@
 <style>
     #particles {
         background-color: #0093E9;
+        /*background-color: white;*/
         background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
     }
 </style>
