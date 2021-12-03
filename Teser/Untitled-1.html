@@ -1,0 +1,156 @@
+<head>
+  <div class="timer"></div>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+    <link href='https://fonts.googleapis.com/css?family=Marcellus+SC' rel='stylesheet' type='text/css'>
+    <script src="https://wow.techbrood.com/libs/jquery/jquery-1.11.1.min.js"></script>
+
+</head>
+<main><style type="text/css">
+  body {
+    margin: 48px;
+    text-align: center;
+  }
+
+  .timer {
+    font-family: sans-serif;
+    display: inline-block;
+    padding: 60px 95px;
+    border-radius: 60px;
+    background: white;
+    text-align: center;
+  }
+
+  .timer__part {
+    font-size: 100px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .timer__btn {
+    width: 65px;
+    height: 65px;
+    margin-left: 16px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    background: #8208e6;
+    cursor: pointer;
+  }
+
+  .timer__btn--start {
+    background: #00b84c;
+  }
+
+  .timer__btn--stop {
+    background: #ff0256;
+  }
+  .timer__btn--onemin {
+    background: #0093e9;
+  }
+</style>
+<script type="text/javascript">
+  class Timer {
+    constructor(root) {
+      root.innerHTML = Timer.getHTML()
+
+      this.el = {
+        minutes: root.querySelector('.timer__part--minutes'),
+        seconds: root.querySelector('.timer__part--seconds'),
+        control: root.querySelector('.timer__btn--control'),
+        reset: root.querySelector('.timer__btn--reset'),
+        onemin: root.querySelector('.timer__btn--onemin'),
+      }
+      this.interval = null
+      this.remainingSeconds = 120
+
+      this.el.control.addEventListener('click', () => {
+        if (this.interval === null) {
+          this.start()
+        } else {
+          this.stop()
+        }
+      })
+
+      this.el.reset.addEventListener('click', () => {
+        const inputMinutes = 1
+
+        if (inputMinutes < 60) {
+          this.stop()
+          this.remainingSeconds = inputMinutes * 60
+          this.updateInterfaceTime()
+        }
+      })
+      this.el.onemin.addEventListener('click', () => {
+        this.stop()
+        this.remainingSeconds = 120
+        this.updateInterfaceTime()
+      })
+    }
+
+    updateInterfaceTime() {
+      const minutes = Math.floor(this.remainingSeconds / 60)
+      const seconds = this.remainingSeconds % 60
+
+      this.el.minutes.textContent = minutes.toString().padStart(2, '0')
+      this.el.seconds.textContent = seconds.toString().padStart(2, '0')
+    }
+
+    updateInterfaceControls() {
+      if (this.interval === null) {
+        this.el.control.innerHTML = `<span class="material-icons">play_arrow</span>`
+        this.el.control.classList.add('timer__btn--start')
+        this.el.control.classList.remove('timer__btn--stop')
+      } else {
+        this.el.control.innerHTML = `<span class="material-icons">pause</span>`
+        this.el.control.classList.add('timer__btn--stop')
+        this.el.control.classList.remove('timer__btn--start')
+      }
+    }
+
+    start() {
+      if (this.remainingSeconds === 0) return
+
+      this.interval = setInterval(() => {
+        this.remainingSeconds--
+        this.updateInterfaceTime()
+
+        if (this.remainingSeconds === 0) {
+          this.stop()
+        }
+      }, 1000)
+
+      this.updateInterfaceControls()
+    }
+
+    stop() {
+      clearInterval(this.interval)
+
+      this.interval = null
+
+      this.updateInterfaceControls()
+    }
+
+    static getHTML() {
+      return `
+			<span class="timer__part timer__part--minutes">02</span>
+			<span class="timer__part">:</span>
+			<span class="timer__part timer__part--seconds">00</span>
+			<button type="button" class="timer__btn timer__btn--control timer__btn--start">
+				<span class="material-icons">play_arrow</span>
+			</button>
+			<button type="button" class="timer__btn timer__btn--reset">
+				<span class="material-icons">timer</span>
+			</button>
+      <button type="button" class="timer__btn timer__btn--onemin">
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M1 12H10.8L8.3 9.5L9.7 8.1L14.6 13L9.7 17.9L8.3 16.5L10.8 14H1V12M21 2H3C1.9 2 1 2.9 1 4V10.1H3V6H21V20H3V16H1V20C1 21.1 1.9 22 3 22H21C22.1 22 23 21.1 23 20V4C23 2.9 22.1 2 21 2" />
+</svg>
+      </button>
+		`
+    }
+  }
+
+  new Timer(document.querySelector('.timer'))
+</script>
+</main>
